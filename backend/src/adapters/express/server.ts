@@ -1,9 +1,23 @@
-import 'dotenv/config'
-import expres from 'express'
+import "dotenv/config";
+import expres, { Application, NextFunction, Request, Response } from "express";
+import { userRouter } from "./routes/userRouter";
+import connectToDatabase from "../../infrastructure/database/database";
 
-const app = expres()
+const app: Application = expres();
 
-const port = process.env.PORT || 8080
-app.listen(port ,() => {
-    console.log(`http://localhost:${port}`);
-})
+connectToDatabase()
+
+app.use(expres.json());
+
+app.use("/user", userRouter);
+
+app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
+  console.error(err.stack);
+  res.status(500).send("Internal Server Error");
+});
+
+const port: number = process.env.PORT ? parseInt(process.env.PORT, 10) : 3000;
+
+app.listen(port, () => {
+  console.log(`http://localhost:${port}`);
+});
