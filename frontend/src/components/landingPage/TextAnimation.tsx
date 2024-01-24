@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import GoogleLogin from "./GoogleLogin";
+import Google from "./Google";
 
 export default function TextAnimation() {
   const slogans = {
@@ -85,7 +85,7 @@ export default function TextAnimation() {
         </div>
         <div className="order-first sm:order-last flex justify-end">
           <div>
-            <GoogleLogin/>
+            <Google/>
           </div>
         </div>
       </div>
