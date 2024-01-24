@@ -33,6 +33,7 @@ export default function TextAnimation() {
     colorGradient[Math.floor(Math.random() * colorGradient.length)];
 
   const words = randomKey.split(" ");
+  localStorage.setItem("appTheme" , randomColor)
 
   return (
     <>
