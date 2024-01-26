@@ -1,5 +1,4 @@
-import Blob from "../components/landingPage/Blob";
-import HRline from "../components/landingPage/HRline";
+import Footer from "../components/landingPage/Footer";
 import TextAnimation from "../components/landingPage/TextAnimation";
 
 export default function LandingPage() {
@@ -9,10 +8,7 @@ export default function LandingPage() {
         <TextAnimation />
       </div>
       <div>
-        <HRline/>
-      </div>
-      <div>
-        <Blob/>
+        <Footer/>
       </div>
     </>
   );
