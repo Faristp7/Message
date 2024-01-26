@@ -3,12 +3,19 @@ import expres, { Application, NextFunction, Request, Response } from "express";
 import { userRouter } from "./routes/userRouter";
 import connectToDatabase from "../../infrastructure/database/database";
 import { authRouter } from "./routes/authRoute";
+import cors from 'cors'
 
 const app: Application = expres();
 
 connectToDatabase();
 
 app.use(expres.json());
+app.use(
+  cors({
+    origin:"http://localhost:5173",
+    optionsSuccessStatus:200
+  })
+)
 
 app.use("/user", userRouter);
 app.use("/auth", authRouter);
