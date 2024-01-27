@@ -5,14 +5,14 @@ const apiInstance = axios.create({
 });
 
 apiInstance.interceptors.request.use(
-  (config) => {
+  (config) => {    
     const token = localStorage.getItem("token");
-    if (token) {
+    if (token) {      
       config.headers.Authorization = `Bearer ${token}`;
     }
     return config;
   },
-  (error) => {
+  (error) => {    
     return Promise.reject(error);
   },
 );

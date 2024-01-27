@@ -1,7 +1,7 @@
 import { CredentialResponse, GoogleLogin } from "@react-oauth/google";
 import { jwtDecode } from "jwt-decode";
 import { googleData } from "../../interface/userInterface";
-import axios from "axios";
+import authApi from "../../api/authApi";
 
 export default function Google() {
   const handleSuccess = async (credentialResponse: CredentialResponse) => {
@@ -10,14 +10,8 @@ export default function Google() {
         credentialResponse.credential,
       ) as googleData;
       const { email, given_name, picture } = credentialResponseDecoded;
-      await axios
-        .post("http://localhost:3000/auth/google", { email, given_name, picture })
-        .then((data) => {
-          console.log(data);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+      const response = await authApi.login({email, given_name , picture})
+      console.log(response);
     }
   };
 
