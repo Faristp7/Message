@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import UserRepository from "../../domain/repositories/userRepositories";
 import { UserModel } from "../../domain/models/User";
+import { UserDocument } from "../../infrastructure/database/models/userModel";
 
 class AuthUseCase {
   private userRepository: UserRepository;
@@ -19,10 +20,11 @@ class AuthUseCase {
     };
 
     try {
-      await this.userRepository.save(userData);
+      await this.userRepository.save(userData as UserDocument);
       res.status(200).json({ message: "Data saved successfully" });
     } catch (error) {
       console.error("Error saving Data");
+      res.status(500).json({ message: "Error saving"})
     }
   }
 }
