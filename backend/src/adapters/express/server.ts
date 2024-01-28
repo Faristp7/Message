@@ -4,12 +4,14 @@ import { userRouter } from "./routes/userRouter";
 import connectToDatabase from "../../infrastructure/database/database";
 import { authRouter } from "./routes/authRoute";
 import cors from 'cors'
+import morgan from 'morgan'
 
 const app: Application = expres();
 
 connectToDatabase();
 
 app.use(expres.json());
+app.use(morgan('dev'))
 app.use(
   cors({
     origin:"http://localhost:5173",

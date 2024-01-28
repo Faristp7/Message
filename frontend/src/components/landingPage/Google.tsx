@@ -11,7 +11,7 @@ export default function Google() {
       ) as googleData;
       const { email, given_name, picture } = credentialResponseDecoded;
       const response = await authApi.login({email, given_name , picture})
-      console.log(response);
+      console.log(response.data);
     }
   };
 
