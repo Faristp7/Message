@@ -2,8 +2,10 @@ import { CredentialResponse, GoogleLogin } from "@react-oauth/google";
 import { jwtDecode } from "jwt-decode";
 import { googleData } from "../../interface/userInterface";
 import authApi from "../../api/authApi";
+import { useNavigate } from "react-router-dom";
 
 export default function Google() {
+  const navigate = useNavigate()
   const handleSuccess = async (credentialResponse: CredentialResponse) => {
     if (credentialResponse.credential) {
       const credentialResponseDecoded = jwtDecode(
@@ -11,7 +13,8 @@ export default function Google() {
       ) as googleData;
       const { email, given_name, picture } = credentialResponseDecoded;
       const response = await authApi.login({email, given_name , picture})
-      console.log(response.data);
+      localStorage.setItem("token" , response.data.token)
+      navigate('/home')
     }
   };
 
