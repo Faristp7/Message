@@ -1,22 +1,18 @@
 import "./App.css";
-import React from "react";
 import LandingPage from "./pages/LandingPage";
 import { Route, Routes } from "react-router-dom";
 import Home from "./components/homePage/Home";
+import { useSelector } from "react-redux";
+import { AuthState } from "./redux/user/userAuth";
 
 function App() {
-  const [isValid , setIsValid] = React.useState<boolean>(false)
+  const isAuth = useSelector((state : AuthState) => state.userAuth.isAuth)
+  console.log(isAuth);
   
-  React.useEffect(() => {
-    const token = localStorage.getItem('token')
-    if(token){
-      setIsValid(true)
-    }
-  },[isValid])
   return (
     <Routes>
      {
-      !isValid ? ( 
+      !isAuth ? ( 
       <Route path="/" element={<LandingPage/>}/>
       ): (
         <Route path="/home" element={<Home/>}/>

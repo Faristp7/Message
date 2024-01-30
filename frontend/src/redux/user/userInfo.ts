@@ -17,6 +17,6 @@ export default userInfoSlice.reducer
 
 export type RootState = {
     userInformation : {
-        username : string
+        username : string   
     }
 }
