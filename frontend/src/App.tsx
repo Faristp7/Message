@@ -1,6 +1,6 @@
 import "./App.css";
 import LandingPage from "./pages/LandingPage";
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import Home from "./components/homePage/Home";
 import { useSelector } from "react-redux";
 import { AuthState } from "./redux/user/userAuth";
@@ -11,14 +11,15 @@ function App() {
   
   return (
     <Routes>
-     {
-      !isAuth ? ( 
-      <Route path="/" element={<LandingPage/>}/>
-      ): (
-        <Route path="/home" element={<Home/>}/>
-      )
-     }
-    </Routes>
+    <Route
+      path="/"
+      element={isAuth ? <Navigate to="/home" /> : <LandingPage />}
+    />
+    <Route
+      path="/home"
+      element={isAuth ? <Home /> : <Navigate to="/" />}
+    />
+  </Routes>
   );
 }
 
